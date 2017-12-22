@@ -7,8 +7,6 @@ module Dude
         map {|a| a.split('=').map(&:strip) }.to_h
     end
 
-    private
-
     def file
       @file = File.join(Dir.home, CONFIG_FILE)
     end

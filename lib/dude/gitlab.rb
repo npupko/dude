@@ -22,6 +22,10 @@ module Dude
         "Please, check the entered issue_id and project"
     end
 
+    def my_issues
+      ::Gitlab.issues(project_id).select.map {|a| [a.iid, a.title, a.labels]}
+    end
+
     private
 
     def project_id
