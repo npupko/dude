@@ -34,7 +34,7 @@ module Dude
       issue_title = Gitlab.new(
         issue_id: issue_id, project_title: project_title
       ).call
-      Toggl.new(title: "##{issue_id} #{issue_title}").start_time_entry
+      Toggl.new(title: "##{issue_id} #{issue_title}", project_title: project_title).start_time_entry
       puts "Starting Toggl task"
     end
 

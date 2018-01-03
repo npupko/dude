@@ -1,4 +1,5 @@
 require 'rest-client'
+require 'date'
 require_relative 'settings'
 
 module Dude
@@ -13,7 +14,7 @@ module Dude
     def report
       report = toggl_report.get params: report_params
       time_worked = JSON.parse(report.body)['total_grand'] / 1000
-      today_time_worked = JSON.parse(report.body)['week_totals'].compact.map {|a| a / 1000}[Time.now.wday - 1]
+      today_time_worked = JSON.parse(report.body)['week_totals'].map {|a| a.nil? ? 0 : a / 1000}[Time.now.wday - 1]
       Interface.new.report(time_worked, today_time_worked)
     end
 
@@ -30,7 +31,8 @@ module Dude
     def report_params
       {
         workspace_id: settings['TOGGL_WORKSPACE_ID'],
-        user_agent: settings['TOGGL_EMAIL']
+        user_agent: settings['TOGGL_EMAIL'],
+        since: Date.parse('monday').strftime('%Y-%m-%d')
       }
     end
 
@@ -38,13 +40,27 @@ module Dude
       {
         time_entry: {
           description: title,
+          pid: project_id,
           created_with: "dude"
         }
       }
     end
 
+    def project_id
+      projects_array.each do |arr|
+        return arr.last if arr.first.eql?(options[:project_title])
+      end
+      nil
+    end
+
     def current_time_entry
       JSON.parse(toggl_api['time_entries/current'].get)['data']
+    end
+
+    def projects_array
+      JSON.parse(
+        toggl_api["workspaces/#{settings['TOGGL_WORKSPACE_ID']}/projects"].get
+      ).map { |a| [a['name'].downcase.gsub(/\s/, '-'), a['id']] }
     end
 
     def toggl_api
@@ -56,7 +72,6 @@ module Dude
     end
 
     def toggl_report
-      # site['posts/1/comments'].post 'Good article.', :content_type => 'text/plain'
       @toggl_report ||= RestClient::Resource.new(
         'https://www.toggl.com/reports/api/v2/weekly',
         settings['TOGGL_TOKEN'],

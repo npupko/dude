@@ -5,9 +5,6 @@ module Dude
   class Interface
     include Settings
 
-    def initialize
-    end
-
     def report(worked_week, worked_today)
       report_weekly(worked_week)
       puts ''

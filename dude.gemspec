@@ -15,18 +15,17 @@ Gem::Specification.new do |spec|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "bin"
-  # spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.executables   = ["dude"]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "byebug"
+  spec.add_development_dependency "byebug", "~> 9.1"
   spec.add_development_dependency "rspec", "~> 3.0"
 
-  spec.add_runtime_dependency "thor"
-  spec.add_runtime_dependency "colorize"
-  spec.add_runtime_dependency "gitlab"
-  spec.add_runtime_dependency "git"
-  spec.add_runtime_dependency "rest-client"
+  spec.add_runtime_dependency "thor", "~> 0.20"
+  spec.add_runtime_dependency "colorize", "~> 0.8"
+  spec.add_runtime_dependency "gitlab", "~> 4.2"
+  spec.add_runtime_dependency "git", "~> 1.3"
+  spec.add_runtime_dependency "rest-client", "~> 2.0"
 end
