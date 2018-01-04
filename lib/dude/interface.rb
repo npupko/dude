@@ -5,10 +5,11 @@ module Dude
   class Interface
     include Settings
 
-    def report(worked_week, worked_today)
-      report_weekly(worked_week)
+    def draw_report(report)
+      @report = report
+      report_weekly
       puts ''
-      report_daily(worked_today, worked_week)
+      report_daily
     end
 
     def issues_list(issues)
@@ -28,31 +29,31 @@ module Dude
 
     private
 
-    def report_weekly(worked_week)
+    def report_weekly
       puts "Week".center(15).colorize(:green).bold
       puts '-' * 15
       puts "Worked:".colorize(:yellow).bold +
-        " #{seconds_to_time(worked_week)} / #{settings['HOURS_PER_WEEK']}:00:00 (#{worked_week * 100 / 144000}%)"
+        " #{seconds_to_time(@report.week_time_worked)} / " \
+        "#{@report.hours_without_weekends}:00:00 " \
+        "(#{@report.week_time_worked * 100 / 144000}%)"
       puts "Time left:".colorize(:yellow).bold +
-        " #{seconds_to_time(144000 - worked_week)}"
+        " #{seconds_to_time(144000 - @report.week_time_worked)}"
     end
 
-    def report_daily(worked_today, worked_week)
+    def report_daily
       puts "Today".center(15).colorize(:green).bold
       puts '-' * 15
       puts "Worked:".colorize(:yellow).bold +
-        " #{seconds_to_time(worked_today)} / #{settings['HOURS_PER_DAY']}:00:00 (#{worked_today * 100 / 28800}%)"
+        " #{seconds_to_time(@report.today_time_worked)} / " \
+        " #{settings['HOURS_PER_DAY']}:00:00 " \
+        "(#{@report.today_time_worked * 100 / 28800}%)"
       puts "Time left:".colorize(:yellow).bold +
-        " #{seconds_to_time(seconds_for_today - worked_week)}"
+        " #{seconds_to_time(@report.seconds_for_today - @report.week_time_worked)}"
     end
 
     def seconds_to_time(s)
       hms = [60,60].reduce([s]) { |m,o| m.unshift(m.shift.divmod(o)).flatten }
       "#{sprintf '%02d', hms[0]}:#{sprintf '%02d', hms[1]}:#{sprintf '%02d', hms[2]}"
-    end
-
-    def seconds_for_today
-      Time.now.wday * settings['HOURS_PER_DAY'].to_i * 3600
     end
 
     def term

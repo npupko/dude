@@ -1,6 +1,7 @@
 require 'rest-client'
 require 'date'
 require_relative 'settings'
+require_relative 'report'
 
 module Dude
   class Toggl
@@ -12,10 +13,8 @@ module Dude
     end
 
     def report
-      report = toggl_report.get params: report_params
-      time_worked = JSON.parse(report.body)['total_grand'] / 1000
-      today_time_worked = JSON.parse(report.body)['week_totals'].map {|a| a.nil? ? 0 : a / 1000}[Time.now.wday - 1]
-      Interface.new.report(time_worked, today_time_worked)
+      report = Report.new(toggl_report.get params: report_params)
+      Interface.new.draw_report(report)
     end
 
     def start_time_entry
