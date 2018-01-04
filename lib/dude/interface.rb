@@ -11,6 +11,29 @@ module Dude
       puts ''
       report_daily
     end
+    
+    def draw_issue_info(info)
+      issue_label = info['labels'].find do |label|
+        ['To Do', 'Doing', 'To Verify'].include? label
+      end
+
+      issue_color = case issue_label
+      when 'To Do'
+        :yellow
+      when 'Doing'
+        :green
+      when 'To Verify'
+        :blue
+      end
+
+      puts "#{info['title']} ##{info['iid']}".colorize(issue_color).bold
+      puts "Status: ".colorize(:yellow) + "#{issue_label}"
+      puts "Estimated time: ".colorize(:yellow) +
+        "#{info['time_stats']['human_time_estimate']}"
+      puts "Spent time: ".colorize(:yellow) +
+        "#{info['time_stats']['human_total_time_spent'] || '0h'}"
+      puts "Link: ".colorize(:yellow) + "#{info['web_url']}"
+    end
 
     def issues_list(issues)
       [['To Do', :yellow], ['Doing', :green], ['To Verify', :blue]].each do |group, color|
@@ -30,24 +53,24 @@ module Dude
     private
 
     def report_weekly
-      puts "Week".center(15).colorize(:green).bold
-      puts '-' * 15
-      puts "Worked:".colorize(:yellow).bold +
+      puts "Week".colorize(:green).bold
+      # puts '-' * 15
+      puts "  Worked:".colorize(:yellow).bold +
         " #{seconds_to_time(@report.week_time_worked)} / " \
         "#{@report.hours_without_weekends}:00:00 " \
         "(#{@report.week_time_worked * 100 / 144000}%)"
-      puts "Time left:".colorize(:yellow).bold +
+      puts "  Time left:".colorize(:yellow).bold +
         " #{seconds_to_time(144000 - @report.week_time_worked)}"
     end
 
     def report_daily
-      puts "Today".center(15).colorize(:green).bold
-      puts '-' * 15
-      puts "Worked:".colorize(:yellow).bold +
+      puts "Today".colorize(:green).bold
+      # puts '-' * 15
+      puts "  Worked:".colorize(:yellow).bold +
         " #{seconds_to_time(@report.today_time_worked)} / " \
         " #{settings['HOURS_PER_DAY']}:00:00 " \
         "(#{@report.today_time_worked * 100 / 28800}%)"
-      puts "Time left:".colorize(:yellow).bold +
+      puts "  Time left:".colorize(:yellow).bold +
         " #{seconds_to_time(@report.seconds_for_today - @report.week_time_worked)}"
     end
 
