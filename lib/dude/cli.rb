@@ -67,7 +67,7 @@ module Dude
     end
 
     def get_issue_title(issue_id, project_title)
-      Gitlab.new(issue_id: issue_id, project_title: project_title).call
+      Gitlab.new(issue_id: issue_id, project_title: project_title).issue_title
     end
 
     def duderc_file_content

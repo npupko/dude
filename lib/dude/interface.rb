@@ -11,6 +11,17 @@ module Dude
       puts ''
       report_daily
     end
+
+    def throw_error(issue_id, project_title)
+      puts "Something went wrong. Please, check input data\n".colorize(:red) +
+        "Project: #{project_title.to_s.bold}\n" +
+        "Issue ID: #{issue_id.to_s.bold}"
+      exit
+    end
+
+    def draw_time_estimate(time)
+      puts "Changed time estimate to #{time.colorize(:green)}"
+    end
     
     def draw_issue_info(info)
       issue_label = info['labels'].find do |label|
@@ -38,7 +49,7 @@ module Dude
     def issues_list(issues)
       [['To Do', :yellow], ['Doing', :green], ['To Verify', :blue]].each do |group, color|
         puts "#{group}:".colorize(color).bold
-        grouped = issues.select {|i| i.last.include?(group)}
+        grouped = issues.select {|i| i[2].include?(group)}
         if grouped.length.zero?
           puts 'Nothing'
         else
