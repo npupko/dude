@@ -2,6 +2,8 @@
 
 A daily assistant in the hard work of a programmer
 
+This program helps to combine such services as [Gitlab](https://gitlab.com), [Toggl](https://toggl.com) and replace most routine activities with one simple CLI utility.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -34,21 +36,30 @@ And configure all variables in this file
 
 `GITLAB_TOKEN=imyiKqwsQBbn1zCMY2PJ` - Your Gitlab token (<https://gitlab.yoursite.com/profile/personal_access_tokens>)
 
-`HOURS_PER_DAY=8` - Work hours per day
+`HOURS_PER_DAY=8` - Working hours per day
 
-`HOURS_PER_WEEK=40` - Work hours per week
+`HOURS_PER_WEEK=40` - Working hours per week
 
 ## Usage
 
-All commands will be described here later, but how you can use `dude help` for short description of every command.
+| Command       | Required parameters | Optional parameters             | Description                                                |
+|---------------|:-------------------:|:-------------------------------:|------------------------------------------------------------|
+| dude install  |          -          |            -                    | Create .duderc file in your home directory                 |
+| dude checkout | issue_id            | project_title<sup>1</sup>               | Checkout to branch with name "ID-issue-title"              |
+| dude track    | issue_id            | project_title<sup>1</sup>               | Start time entry in Toggl with issue project, title and id |
+| dude tasks    |          -          | project_title<sup>1</sup>               | Show issues in current project assigned to you             |
+| dude estimate | duration            | issue_id<sup>2</sup>, project_title<sup>1</sup> | Estimate time for issue                                    |
+| dude stop     |          -          | project_title<sup>1</sup>               | Stop current time entry in Toggl, move issue to `To Do`    |
+| dude stats    |          -          |            -                    | Display your daily and weekly stats from Toggl             |
+| dude start    | issue_id            | project_title<sup>1</sup>               | Do `checkout`, `track` and `move` actions                  |
+| dude move     | label               | issue_id<sup>2</sup>, project_title<sup>1</sup> | Move issue to another column                               |
+| dude version  |          -          |            -                    | Display gem version                                        |
 
-<!-- TODO: Write usage instructions here -->
+You also can use `dude help` for short description of every command.
 
-<!-- ## Development -->
+<sup>1</sup>: You can not specify a `project_title` if the project folder name matches its name<br>
+<sup>2</sup>: You can not specify `issue_id` if the correct name for the git branch is specified
 
-<!-- After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment. -->
-
-<!-- To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org). -->
 
 ## Contributing
 
