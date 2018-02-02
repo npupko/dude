@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = "bin"
   spec.executables   = ["dude"]
   spec.require_paths = ["lib"]
+  spec.required_ruby_version = '>= 2.2.0'
 
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
@@ -25,7 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "thor", "~> 0.20"
   spec.add_runtime_dependency "colorize", "~> 0.8"
-  spec.add_runtime_dependency "gitlab", "~> 4.2"
+  spec.add_runtime_dependency "gitlab", "~> 4.3"
   spec.add_runtime_dependency "git", "~> 1.3"
   spec.add_runtime_dependency "rest-client", "~> 2.0"
 end
