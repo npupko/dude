@@ -39,6 +39,14 @@ module Dude
       Interface.new.draw_issue_info(issue_info)
     end
 
+    def move_issue
+      test_input_data
+      labels = ::Gitlab.issue(project_id, options[:issue_id]).labels
+      labels = labels.reject {|e| ['To Do', 'Doing', 'To Verify'].include?(e)}.
+        push(options[:label]).join(',')
+      ::Gitlab.edit_issue(project_id, options[:issue_id], { labels: labels })
+    end
+
     private
 
     def test_input_data
