@@ -1,7 +1,6 @@
 require 'thor'
 require "dude/version"
 require 'colorize'
-require 'byebug'
 require_relative 'gitlab'
 require_relative 'git'
 require_relative 'toggl'
