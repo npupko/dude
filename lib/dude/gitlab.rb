@@ -62,7 +62,13 @@ module Dude
     end
 
     def all_issues_on_project
-      ::Gitlab.issues(project_id).map {|a| [a.iid, a.title, a.labels, a.assignee&.id]}
+      ::Gitlab.issues(project_id).map {|a| [a.iid, a.title, a.labels, assignees_id(a)]}
+    end
+
+    def assignees_id(issue)
+      issue&.assignees&.first['id']
+    rescue NoMethodError
+      nil
     end
 
     def user
