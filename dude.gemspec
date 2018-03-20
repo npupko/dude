@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.version       = Dude::VERSION
   spec.authors       = ["Nikita Pupko"]
   spec.email         = ["lazynick7@gmail.com"]
-  spec.summary       = %q{Daily assistant}
-  spec.description   = %q{A daily assistant in the hard work of a programmer}
+  spec.summary       = %q{A daily assistant in the hard work of a programmer.}
+  spec.description   = %q{This program helps to combine such services as Gitlab, Toggl and git and replace most routine activities with one simple CLI utility.}
   spec.homepage      = "https://github.com/Random4405/dude"
   spec.license       = "MIT"
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

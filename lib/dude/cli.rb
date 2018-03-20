@@ -1,6 +1,7 @@
 require 'thor'
 require "dude/version"
 require 'colorize'
+require 'byebug'
 require_relative 'gitlab'
 require_relative 'git'
 require_relative 'toggl'
@@ -25,7 +26,7 @@ module Dude
     def checkout(issue_id, project_title = folder_name)
       issue_title = get_issue_title(issue_id, project_title)
       branch_name = git_branch_name(issue_title, issue_id)
-      git(branch_name: branch_name).call
+      git(branch_name).call
       puts "Branch changed to '#{branch_name}'".colorize(:green)
     end
 
