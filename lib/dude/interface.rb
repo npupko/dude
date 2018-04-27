@@ -22,7 +22,7 @@ module Dude
     def draw_time_estimate(time)
       puts "Changed time estimate to #{time.colorize(:green)}"
     end
-    
+
     def draw_issue_info(info)
       issue_label = info['labels'].find do |label|
         ['To Do', 'Doing', 'To Verify'].include? label

@@ -1,3 +1,3 @@
 module Dude
-  VERSION = "0.5.5"
+  VERSION = "0.6.2-rc1"
 end

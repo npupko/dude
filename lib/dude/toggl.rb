@@ -12,27 +12,11 @@ module Dude
       @options = options
     end
 
-    def report
-      report = Report.new(toggl_report.get params: report_params)
-      Interface.new.draw_report(report)
-    end
-
-    def start_time_entry
-      toggl_api['time_entries/start'].post time_entry_params(options[:title]).to_json, content_type: :json
-    end
 
     def stop_current_time_entry
       toggl_api["time_entries/#{current_time_entry['id']}/stop"].put ''
-    end
-
-    private
-
-    def report_params
-      {
-        workspace_id: settings['TOGGL_WORKSPACE_ID'],
-        user_agent: settings['TOGGL_EMAIL'],
-        since: Date.parse('monday').strftime('%Y-%m-%d')
-      }
+    rescue NoMethodError
+      puts 'No runned time entries in Toggl'.colorize(:yellow)
     end
 
     def time_entry_params(title)
@@ -45,34 +29,9 @@ module Dude
       }
     end
 
-    def project_id
-      projects_array.each do |arr|
-        return arr.last if arr.first.eql?(options[:project_title])
-      end
-      nil
-    end
-
-    def current_time_entry
-      JSON.parse(toggl_api['time_entries/current'].get)['data']
-    end
-
-    def projects_array
-      JSON.parse(
-        toggl_api["workspaces/#{settings['TOGGL_WORKSPACE_ID']}/projects"].get
-      ).map { |a| [a['name'].downcase.gsub(/\s/, '-'), a['id']] }
-    end
-
     def toggl_api
       @toggl_api ||= RestClient::Resource.new(
         'https://www.toggl.com/api/v8',
-        settings['TOGGL_TOKEN'],
-        'api_token'
-      )
-    end
-
-    def toggl_report
-      @toggl_report ||= RestClient::Resource.new(
-        'https://www.toggl.com/reports/api/v2/weekly',
         settings['TOGGL_TOKEN'],
         'api_token'
       )

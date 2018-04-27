@@ -6,8 +6,8 @@ module Dude
     include Settings
     attr_reader :report
 
-    def initialize(report_json)
-      @report = JSON.parse(report_json.body)
+    def initialize(report)
+      @report = report
     end
 
     def week_time_worked
