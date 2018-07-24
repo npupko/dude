@@ -9,38 +9,35 @@ module Dude
         {
           workspace_id: settings['TOGGL_WORKSPACE_ID'],
           user_agent: settings['TOGGL_EMAIL'],
-          start_date: '2013-03-10T15:42:46+02:00'
+          since: Date.today.prev_year,
+          until: Date.today.to_s
         }
       end
 
       def response
-        toggl_api['time_entries'].get params
+        toggl_summary.get params: params
       end
 
       def time_entries
-        JSON.parse(response.body)
+        JSON.parse(response.body)['data']
       end
 
-      def current_issue_time_entries
-        time_entries.select { |entry| match_project_id?(entry) && match_issue_id?(entry) }
+      def all_project_issues
+        time_entries.find { |project| project['id'].eql? project_id }['items']
       end
 
-      def match_project_id?(time_entry)
-        time_entry['pid'].eql? project_id
+      def current_issue_time_entry
+        all_project_issues.find { |entry| match_issue_id?(entry) }
       end
 
       def match_issue_id?(time_entry)
-        # TODO: Deprecated behaviour
-        time_entry['description'].match?(/\(##{options[:issue_id]}\)/) ||
-          time_entry['description'].match?(/##{options[:issue_id]}\s/)
-      end
-
-      def formatted_time_entries
-        current_issue_time_entries.map {|a| [a['description'], a['duration']]}
+        title = time_entry.dig('title', 'time_entry')
+        title.match?(/\(##{options[:issue_id]}\)/) ||
+          title.match?(/##{options[:issue_id]}\s/)
       end
 
       def parse_time_entries_list
-        current_issue_time_entries.map {|a| a['duration'] }.sum
+        current_issue_time_entry['time']
       end
 
       def project_id

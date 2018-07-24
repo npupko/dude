@@ -20,6 +20,14 @@ module Dude
         )
       end
 
+      def toggl_summary
+        @toggl_summary ||= RestClient::Resource.new(
+          'https://www.toggl.com/reports/api/v2/summary',
+          settings['TOGGL_TOKEN'],
+          'api_token'
+        )
+      end
+
       def projects_response
         toggl_api["workspaces/#{settings['TOGGL_WORKSPACE_ID']}/projects"].get
       end
