@@ -2,7 +2,7 @@ module Dude
   module Toggl
     class IssueSpendTime < Dude::Toggl::Base
       def call
-        parse_time_entries_list
+        parse_time_entries_list / 1000
       end
 
       def params
