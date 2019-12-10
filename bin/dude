@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
 
-require "dude/cli"
+require "dude"
 
-Dude::CLI.start
