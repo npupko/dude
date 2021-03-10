@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["work.pupko@gmail.com"]
 
   spec.summary       = %q{A daily assistant in the hard work of a programmer.}
-  spec.description   = %q{This program helps to combine such services as Gitlab, Toggl and git and replace most routine activities with one simple CLI utility.}
+  spec.description   = %q{This program helps to combine such services as Jira, Toggl and git and replace most routine activities with one simple CLI utility.}
   spec.homepage      = "https://github.com/npupko/dude"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
