@@ -9,6 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{A daily assistant in the hard work of a programmer.}
   spec.description   = %q{This program helps to combine such services as Jira, Toggl and git and replace most routine activities with one simple CLI utility.}
   spec.homepage      = "https://github.com/npupko/dude"
+  spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
@@ -23,10 +24,12 @@ Gem::Specification.new do |spec|
   spec.executables   = ["dude"]
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency 'dry-cli', '>= 0.6'
+  spec.add_runtime_dependency 'dry-cli', '~> 0.6'
   spec.add_runtime_dependency "faraday", "~> 1.1"
   spec.add_runtime_dependency "colorize", "~> 0.8.1"
   spec.add_runtime_dependency "jira-ruby", "~> 2.1"
 
   spec.add_development_dependency 'pry', '~> 0.14.0'
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'rspec', '~> 3.0'
 end
