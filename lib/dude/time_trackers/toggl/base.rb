@@ -1,3 +1,5 @@
+require 'faraday'
+
 module Dude
   module Toggl
     class Base

@@ -1,4 +1,3 @@
-# require 'forwardable'
 require 'dude/project_management/jira/client'
 
 module Dude
