@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dude-cli (2.0.2)
+    dude-cli (2.0.4)
       colorize (~> 0.8.1)
       dry-cli (~> 0.6)
       faraday (~> 1.1)
