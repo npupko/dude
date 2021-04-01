@@ -62,6 +62,15 @@ DONE_LIST_NAME=Done
 
 ## Usage
 
+#### Using RVM
+
+To run gem in any folder using RVM just install gem to the global default ruby version and add alias to ~/.bashrc or ~/.zshrc
+(Replace 2.7.2 to your ruby version and/or gemset)
+
+```bash
+alias dude="rvm 2.7.2 do dude"
+```
+
 |    Command    | Required parameters | Optional parameters |                                       Description                                      |
 |:-------------:|:-------------------|:-------------------|:--------------------------------------------------------------------------------------|
 | dude install  | -                   | -                   | Create .duderc file in your home directory                                             |
