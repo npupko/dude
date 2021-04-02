@@ -1,0 +1,25 @@
+# Put this in the file: .github/workflows/verify.yml
+
+name: Verify
+on: [push, pull_request]
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6 # Not needed with a .ruby-version file
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - run: bundle exec rubocop
+
+  rspec:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6 # Not needed with a .ruby-version file
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - run: bundle exec rspec

@@ -3,12 +3,8 @@
 RSpec.describe Dude::Commands::Tasks do
   subject { described_class.new }
 
-  class Dude::ProjectManagement::Client
-    def fetch_current_tasks;  super end
-  end
-
-  let(:client) { instance_double('Dude::ProjectManagement::Client', fetch_current_tasks: tasks) }
-  let(:tasks) {
+  let(:client) { double('Dude::ProjectManagement::Client', fetch_current_tasks: tasks) }
+  let(:tasks) do
     [
       Dude::ProjectManagement::Entities::Issue.new(
         assignee: 'Author',
@@ -34,7 +30,7 @@ RSpec.describe Dude::Commands::Tasks do
         title: 'Blow up the internet'
       )
     ]
-  }
+  end
 
   before do
     allow(Dude::ProjectManagement::Client).to receive(:new).and_return(client)
@@ -52,9 +48,9 @@ RSpec.describe Dude::Commands::Tasks do
     ]
   end
 
-  it "prints list of tasks" do
+  it 'prints list of tasks' do
     lines.each do |line|
-      expect(STDOUT).to receive(:puts).with(line).ordered
+      expect($stdout).to receive(:puts).with(line).ordered
     end
 
     subject.call

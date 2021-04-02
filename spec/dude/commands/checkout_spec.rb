@@ -11,7 +11,7 @@ RSpec.describe Dude::Commands::Checkout do
     expect(Dude::Git::Checkout).to receive(:new).and_return(checkout)
   end
 
-  it "calls git checkout with correct branch name" do
+  it 'calls git checkout with correct branch name' do
     expect(checkout).to receive(:call).with('DMD-123-task-name')
     subject.call(id: 'DMD-123')
   end
