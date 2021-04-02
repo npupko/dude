@@ -9,7 +9,7 @@ module Dude
 
       def call
         tasks = Dude::ProjectManagement::Client.new.get_current_tasks
-        lists = tasks.map {|issue| issue.status}.uniq
+        lists = tasks.map { |issue| issue.status }.uniq
 
         lists.each do |list|
           puts "#{list}:".green.bold
