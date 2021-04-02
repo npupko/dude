@@ -1,9 +1,9 @@
 require "colorize"
 
-require "dude/settings"
-require "dude/version"
-require "dude/commands"
-require "dude/git"
+require_relative "./dude/settings"
+require_relative "./dude/version"
+require_relative "./dude/commands"
+require_relative "./dude/git"
 
 module Dude
   class ToBeImplementedError < StandardError; end

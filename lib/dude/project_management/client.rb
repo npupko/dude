@@ -1,4 +1,4 @@
-require 'dude/project_management/jira/client'
+require_relative './jira/client'
 
 module Dude
   module ProjectManagement

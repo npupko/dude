@@ -1,4 +1,4 @@
-require 'dude/settings'
+require_relative '../settings'
 
 module Dude
   module Commands

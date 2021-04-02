@@ -1,5 +1,4 @@
-require 'dude/project_management/entities/issue'
-require 'dude/project_management/jira/client'
+require_relative '../entities/issue'
 
 module Dude
   module ProjectManagement

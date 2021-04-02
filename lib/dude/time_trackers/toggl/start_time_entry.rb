@@ -1,4 +1,4 @@
-require 'dude/time_trackers/toggl/base'
+require_relative './base'
 
 module Dude
   module Toggl

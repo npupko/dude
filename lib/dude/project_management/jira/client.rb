@@ -1,7 +1,7 @@
 require 'jira-ruby'
-require 'dude/project_management/jira/get_current_tasks'
-require 'dude/project_management/jira/move_task_to_list'
-require 'dude/project_management/jira/get_task_name_by_id'
+require_relative './get_current_tasks'
+require_relative './move_task_to_list'
+require_relative './get_task_name_by_id'
 
 module Dude
   module ProjectManagement

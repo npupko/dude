@@ -1,4 +1,4 @@
-require 'dude/time_trackers/toggl/start_time_entry'
+require_relative '../time_trackers/toggl/start_time_entry'
 
 module Dude
   module Commands

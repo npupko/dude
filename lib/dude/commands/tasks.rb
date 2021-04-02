@@ -1,4 +1,4 @@
-require 'dude/project_management/client'
+require_relative '../project_management/client'
 
 module Dude
   module Commands
