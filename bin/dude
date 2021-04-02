@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require "dude"
+require_relative '../lib/dude'
 
 Dry::CLI.new(Dude::Commands).call

@@ -1,4 +1,6 @@
-require 'dude/time_trackers/toggl/base'
+# frozen_string_literal: true
+
+require_relative './base'
 
 module Dude
   module Toggl

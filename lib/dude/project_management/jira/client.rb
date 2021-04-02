@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'jira-ruby'
-require 'dude/project_management/jira/get_current_tasks'
-require 'dude/project_management/jira/move_task_to_list'
-require 'dude/project_management/jira/get_task_name_by_id'
+require_relative './fetch_current_tasks'
+require_relative './move_task_to_list'
+require_relative './get_task_name_by_id'
 
 module Dude
   module ProjectManagement
@@ -28,12 +30,12 @@ module Dude
           client.respond_to_missing?(method_name, include_private)
         end
 
-        def method_missing(m, *args, &block)
-          client.send(m, *args, &block)
+        def method_missing(method, *args, &block)
+          client.send(method, *args, &block)
         end
 
-        def get_current_tasks
-          GetCurrentTasks.new(client).call
+        def fetch_current_tasks
+          FetchCurrentTasks.new(client).call
         end
 
         def move_task_to_list(id, list)

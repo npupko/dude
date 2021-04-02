@@ -1,4 +1,4 @@
-require 'dude/project_management/jira/client'
+# frozen_string_literal: true
 
 module Dude
   module ProjectManagement

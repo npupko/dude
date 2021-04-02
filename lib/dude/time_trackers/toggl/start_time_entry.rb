@@ -1,9 +1,10 @@
-require 'dude/time_trackers/toggl/base'
+# frozen_string_literal: true
+
+require_relative './base'
 
 module Dude
   module Toggl
     class StartTimeEntry < Dude::Toggl::Base
-
       def call(task_title:, project:)
         @task_title = task_title
         @project = project

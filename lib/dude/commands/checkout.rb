@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Dude
   module Commands
     class Checkout < Dry::CLI::Command
-      desc "Checkout to branch named as current issue"
+      desc 'Checkout to branch named as current issue'
 
-      argument :id, required: true, desc: "The card short ID"
+      argument :id, required: true, desc: 'The card short ID'
 
       def call(id:)
         client = ProjectManagement::Client.new

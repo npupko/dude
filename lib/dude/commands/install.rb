@@ -1,17 +1,19 @@
-require 'dude/settings'
+# frozen_string_literal: true
+
+require_relative '../settings'
 
 module Dude
   module Commands
     class Install < Dry::CLI::Command
-      desc "Creates .duderc for future configuration"
+      desc 'Creates .duderc for future configuration'
 
       def call
         path = File.join(Dir.home, Settings::CONFIG_FILE)
         if File.exist?(path)
-          puts "Config file already exists"
+          puts 'Config file already exists'
         else
-          File.open(path, 'w') {|f| f.write(duderc_file_content) }
-          puts ".duderc created in your HOME directory"
+          File.open(path, 'w') { |f| f.write(duderc_file_content) }
+          puts '.duderc created in your HOME directory'
         end
       end
 
