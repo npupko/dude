@@ -1,5 +1,6 @@
 # Dude
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8c564cf8054e4575b20b580d47020f52)](https://app.codacy.com/gh/npupko/dude?utm_source=github.com&utm_medium=referral&utm_content=npupko/dude&utm_campaign=Badge_Grade_Settings)
 [![Gem Version](https://badge.fury.io/rb/dude-cli.svg)](https://badge.fury.io/rb/dude-cli)
 ![Codacy coverage](https://img.shields.io/codacy/coverage/8c564cf8054e4575b20b580d47020f52)
 ![Gem](https://img.shields.io/gem/dv/dude-cli/stable)
