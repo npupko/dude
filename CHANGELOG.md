@@ -1,10 +1,13 @@
 # Changelog
 
-## [Unreleased]
+## [2.0.6] - 2021-04-02
 
 ### Added
-
-- Added Trello support
+- RSpec and coverage
+- Rubocop style changes
+- Fixed #15
+- Fixed README errors
+- Changed requires to relatives
 
 ## [2.0.0] - 2021-03-10
 
@@ -23,3 +26,4 @@
 
 [2.0.0]: https://github.com/npupko/dude/releases/tag/2.0.0
 [1.0.2]: https://github.com/npupko/dude/releases/tag/1.0.2
+[1.0.6]: https://github.com/npupko/dude/releases/tag/1.0.6
