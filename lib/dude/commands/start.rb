@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module Dude
   module Commands
     class Start < Dry::CLI::Command
       include Settings
 
-      desc "Start task (Do checkout, track and move actions)"
+      desc 'Start task (Do checkout, track and move actions)'
 
-      argument :id, required: true, desc: "The card short ID"
+      argument :id, required: true, desc: 'The card short ID'
 
       def call(id:)
         Commands::Move.new.call(id: id, list: selected_list('in_progress'))

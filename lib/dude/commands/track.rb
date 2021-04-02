@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../time_trackers/toggl/start_time_entry'
 
 module Dude
@@ -5,9 +7,9 @@ module Dude
     class Track < Dry::CLI::Command
       include Settings
 
-      desc "Start time entry in Toggl with issue title and id"
+      desc 'Start time entry in Toggl with issue title and id'
 
-      argument :id, required: true, desc: "The card short ID"
+      argument :id, required: true, desc: 'The card short ID'
 
       def call(id:)
         @id = id

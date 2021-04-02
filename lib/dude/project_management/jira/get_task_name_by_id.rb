@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Dude
   module ProjectManagement
     module Jira

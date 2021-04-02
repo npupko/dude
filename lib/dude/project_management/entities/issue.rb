@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Dude
   module ProjectManagement
     module Entities
       class Issue
         attr_accessor :id, :title, :description, :status, :assignee
 
-        def initialize(id: , title:, description:, status:, assignee: nil)
+        def initialize(id:, title:, description:, status:, assignee: nil)
           @id = id
           @title = title
           @description = description

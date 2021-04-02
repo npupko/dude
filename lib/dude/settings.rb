@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Dude
   module Settings
     CONFIG_FILE = '.duderc'
@@ -5,6 +7,7 @@ module Dude
     def settings
       @settings ||= read(file).strip.split("\n").map do |line|
         next if line =~ /^#/ || line.empty?
+
         line.split('=').map(&:strip)
       end.compact.to_h
     end
