@@ -1,4 +1,10 @@
-# Dude [![Gem Version](https://badge.fury.io/rb/dude-cli.svg)](https://badge.fury.io/rb/dude-cli)
+# Dude
+
+[![Gem Version](https://badge.fury.io/rb/dude-cli.svg)](https://badge.fury.io/rb/dude-cli)
+![Codacy coverage](https://img.shields.io/codacy/coverage/8c564cf8054e4575b20b580d47020f52)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a02f0a87f88542c89ac5bf62d1a7d0f7)](https://www.codacy.com/gh/npupko/dude/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=npupko/dude&amp;utm_campaign=Badge_Grade)
+![Gem](https://img.shields.io/gem/dv/dude-cli/stable)
+![GitHub](https://img.shields.io/github/license/npupko/dude)
 
 A daily assistant in the hard work of a programmer
 
