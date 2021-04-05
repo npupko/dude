@@ -12,7 +12,7 @@ module Dude
       def call(id:)
         Commands::Move.new.call(id: id, list: selected_list('in_progress'))
         Commands::Checkout.new.call(id: id)
-        Commands::Track.new.call(id: id)
+        Commands::Track.new.call(id: id) if time_tracking_enabled?
       end
 
       private
@@ -25,6 +25,10 @@ module Dude
         when 'testing' then settings['TESTING_LIST_NAME']
         when 'done' then settings['DONE_LIST_NAME']
         end
+      end
+
+      def time_tracking_enabled?
+        !settings['TOGGL_TOKEN'].nil?
       end
     end
   end

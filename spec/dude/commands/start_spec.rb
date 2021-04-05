@@ -8,7 +8,10 @@ RSpec.describe Dude::Commands::Start do
   let(:track) { instance_double('Dude::Commands::Track', call: true) }
 
   before do
-    allow(subject).to receive(:settings).and_return({ 'IN_PROGRESS_LIST_NAME' => 'list_name' })
+    allow(subject).to receive(:settings).and_return({
+      'IN_PROGRESS_LIST_NAME' => 'list_name',
+      'TOGGL_TOKEN' => 'token'
+    })
     allow(Dude::Commands::Move).to receive(:new).and_return(move)
     allow(Dude::Commands::Checkout).to receive(:new).and_return(checkout)
     allow(Dude::Commands::Track).to receive(:new).and_return(track)
@@ -27,5 +30,18 @@ RSpec.describe Dude::Commands::Start do
   it 'calls Commands::Track with correct arguments' do
     expect(track).to receive(:call).with(id: 'DMD-123')
     subject.call(id: 'DMD-123')
+  end
+
+  context 'without providing Toggl TOKEN' do
+    before do
+      allow(subject).to receive(:settings).and_return({
+        'IN_PROGRESS_LIST_NAME' => 'list_name'
+      })
+    end
+
+    it 'calls Commands::Track with correct arguments' do
+      expect(track).to_not receive(:call).with(id: 'DMD-123')
+      subject.call(id: 'DMD-123')
+    end
   end
 end

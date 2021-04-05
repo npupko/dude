@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'support/coverage'
+require_relative 'support/supress_output'
 
 require 'bundler/setup'
 require 'dude'

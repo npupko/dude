@@ -2,8 +2,12 @@ Style/Documentation:
   Enabled: false
 
 AllCops:
+  NewCops: enable
   SuggestExtensions: false
   TargetRubyVersion: 2.5
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
