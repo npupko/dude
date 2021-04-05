@@ -12,9 +12,9 @@ RSpec.describe Dude::Commands::Track do
     allow(Dude::ProjectManagement::Client).to receive(:new).and_return(client)
     allow(client).to receive(:get_task_name_by_id).with('DMD-123').and_return('Issue title')
     allow(subject).to receive(:settings).and_return({
-                                                      'TOGGL_PROJECT_NAME' => 'ProjectName',
-                                                      'TOGGL_TASK_FORMAT' => format
-                                                    })
+      'TOGGL_PROJECT_NAME' => 'ProjectName',
+      'TOGGL_TASK_FORMAT' => format
+    })
   end
 
   it 'applies title format and calls start with formatted issue' do
