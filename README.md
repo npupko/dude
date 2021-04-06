@@ -63,7 +63,7 @@ DONE_LIST_NAME=Done
 
 `TOGGL_WORKSPACE_ID` - Can be copied from url here: https://toggl.com/app/projects/. Example: 123456
 
-#### Use the *id* and *title* and specify format for the task titles in Trello or keep it as it is
+#### Use the *id* and *title* and specify format for the task titles in Toggl or keep it as it is
 `TOGGL_TASK_FORMAT=[id] title`
 
 ## Usage
