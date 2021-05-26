@@ -32,7 +32,10 @@ After that create .duderc file in your HOME directory by command:
 
 And configure all variables in this file 
 
-`PROJECT_MANAGEMENT_TOOL=jira` - Project management (Now only Jira supported)
+`PROJECT_MANAGEMENT_TOOL=jira|trello` - Project management (Now only Jira and Trello supported)
+
+##### Jira setup
+
 `ATLASSIAN_EMAIL` - Your Jira email
 
 `ATLASSIAN_TOKEN` - How to create Atlassian token: https://support.siteimprove.com/hc/en-gb/articles/360004317332-How-to-create-an-API-token-from-your-Atlassian-account
@@ -46,6 +49,12 @@ Just open your atlassian main board and copy id from the url after rapidView=*ID
 
 Example: https://dealmakerns.atlassian.net/secure/RapidBoard.jspa?rapidView=23&projectKey=DT - 23 is the id
 
+##### Trello setup
+You could generate your key and token here: https://trello.com/app-key
+
+`TRELLO_KEY`
+
+`TRELLO_TOKEN`
 
 #### Replace it with your project list names. Skip for empty lists
 
