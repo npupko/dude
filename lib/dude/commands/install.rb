@@ -23,19 +23,6 @@ module Dude
         <<~HEREDOC
           # Please, don't use quotes and spaces.
           # Write all variables using following format: NAME=VALUE
-          #
-          # Now jira only (Github, Gitlab, Trello later)
-          PROJECT_MANAGEMENT_TOOL=jira
-          ATLASSIAN_EMAIL=
-          # How to create Atlassian token: https://support.siteimprove.com/hc/en-gb/articles/360004317332-How-to-create-an-API-token-from-your-Atlassian-account
-          ATLASSIAN_TOKEN=
-          # URL of your project. Example: https://example.atlassian.net
-          ATLASSIAN_URL=
-          # KEY of your project. If your issues have id BT-123 - BT is the key
-          ATLASSIAN_PROJECT_KEY=
-          # Just open your atlassian main board and copy id from the url after rapidView=*ID* part.
-          # Example: https://dealmakerns.atlassian.net/secure/RapidBoard.jspa?rapidView=23&projectKey=DT - 23 is the id
-          ATLASSIAN_BOARD_ID=
 
           # Replace it with your project list names. Skip for empty lists
           TODO_LIST_NAME=To Do
@@ -52,6 +39,31 @@ module Dude
           TOGGL_WORKSPACE_ID=
           # Use the *id* and *title* and specify format for the task titles in Trello or keep it as it is
           TOGGL_TASK_FORMAT=[id] title
+
+          # Now jira/trello only (Github, Gitlab)
+          # Choose one and uncomment section for Jira or Trello
+
+          # [TRELLO setup start]
+          # # https://trello.com/app-key
+          # PROJECT_MANAGEMENT_TOOL=trello
+          # TRELLO_KEY=
+          # TRELLO_TOKEN=
+          # [TRELLO setup end]
+
+          # [JIRA setup start]
+          PROJECT_MANAGEMENT_TOOL=jira
+          ATLASSIAN_EMAIL=
+          # How to create Atlassian token: https://support.siteimprove.com/hc/en-gb/articles/360004317332-How-to-create-an-API-token-from-your-Atlassian-account
+          ATLASSIAN_TOKEN=
+          # URL of your project. Example: https://example.atlassian.net
+          ATLASSIAN_URL=
+          # KEY of your project. If your issues have id BT-123 - BT is the key
+          ATLASSIAN_PROJECT_KEY=
+          # Just open your atlassian main board and copy id from the url after rapidView=*ID* part.
+          # Example: https://dealmakerns.atlassian.net/secure/RapidBoard.jspa?rapidView=23&projectKey=DT - 23 is the id
+          ATLASSIAN_BOARD_ID=
+          # [JIRA setup end]
+
         HEREDOC
       end
     end
