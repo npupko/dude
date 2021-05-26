@@ -8,12 +8,16 @@ module Dude
       class FetchCurrentTasks
         include Settings
 
-        def initialize(client)
+        attr_reader :fetch_lists
+
+        def initialize(client, fetch_lists: nil)
           @client = client
+
+          @fetch_lists = fetch_lists || FetchLists.new(client)
         end
 
         def call
-          lists = FetchLists.new(client).call
+          lists = fetch_lists.call
           lists.map { |list| retrieve_list_issues(list) }.flatten
         end
 
