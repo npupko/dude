@@ -20,7 +20,8 @@ RSpec.describe Dude::ProjectManagement::Trello::Client do
   end
 
   it '#fetch_current_tasks' do
-    expect(Dude::ProjectManagement::Trello::FetchCurrentTasks).to receive(:new)
+    expect(Dude::ProjectManagement::Trello::FetchCurrentTasks)
+      .to(receive(:new))
       .with(subject.client).and_return(fetch_current_tasks)
     expect(fetch_current_tasks).to receive(:call)
 
@@ -28,7 +29,8 @@ RSpec.describe Dude::ProjectManagement::Trello::Client do
   end
 
   it '#move_task_to_list' do
-    expect(Dude::ProjectManagement::Trello::MoveTaskToList).to receive(:new)
+    expect(Dude::ProjectManagement::Trello::MoveTaskToList)
+      .to(receive(:new))
       .with(subject.client, id: 'id', list_name: 'list').and_return(move_task_to_list)
     expect(move_task_to_list).to receive(:call)
 
@@ -36,7 +38,8 @@ RSpec.describe Dude::ProjectManagement::Trello::Client do
   end
 
   it '#get_task_name_by_id' do
-    expect(Dude::ProjectManagement::Trello::GetTaskNameById).to receive(:new)
+    expect(Dude::ProjectManagement::Trello::GetTaskNameById)
+      .to(receive(:new))
       .with(subject.client, id: 'id').and_return(get_task_name_by_id)
     expect(get_task_name_by_id).to receive(:call)
 

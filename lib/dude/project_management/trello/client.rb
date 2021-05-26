@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './fetch_current_tasks'
+require_relative './fetch_current_task'
 require_relative './move_task_to_list'
 require_relative './get_task_name_by_id'
 
@@ -32,6 +33,10 @@ module Dude
 
         def fetch_current_tasks
           FetchCurrentTasks.new(client).call
+        end
+
+        def fetch_current_task(id)
+          FetchCurrentTask.new(client, id: id).call
         end
 
         def move_task_to_list(id, list)

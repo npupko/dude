@@ -9,6 +9,7 @@ require_relative './commands/start'
 require_relative './commands/track'
 require_relative './commands/stop'
 require_relative './commands/install'
+require_relative './commands/pr'
 
 module Dude
   module Commands
@@ -22,5 +23,9 @@ module Dude
     register 'track', Dude::Commands::Track, aliases: ['tr']
     register 'stop', Dude::Commands::Stop
     register 'start', Dude::Commands::Start, aliases: ['st']
+
+    register 'pr' do |prefix|
+      prefix.register 'create', Dude::Commands::PR::Create
+    end
   end
 end

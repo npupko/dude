@@ -4,14 +4,15 @@ module Dude
   module ProjectManagement
     module Entities
       class Issue
-        attr_accessor :id, :title, :description, :status, :assignee
+        attr_accessor :id, :title, :description, :status, :assignee, :url
 
-        def initialize(id:, title:, description:, status:, assignee: nil)
-          @id = id
-          @title = title
-          @description = description
-          @status = status
-          @assignee = assignee
+        def initialize(params)
+          @id = params[:id]
+          @title = params[:title]
+          @description = params[:description]
+          @status = params[:status]
+          @assignee = params[:assignee]
+          @url = params[:url]
         end
 
         def todo?
