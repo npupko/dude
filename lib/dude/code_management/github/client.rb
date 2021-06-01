@@ -15,7 +15,7 @@ module Dude
         end
 
         def create_pull_request(issue:, owner:, repo:, params:)
-          CreatePullRequest.new.call(issue: issue, owner: owner, repo: repo, params: params)
+          CreatePullRequest.new.call(client, issue: issue, owner: owner, repo: repo, params: params)
         end
       end
     end

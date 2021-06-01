@@ -8,7 +8,7 @@ module Dude
       class CreatePullRequest
         include Settings
 
-        def call(issue:, owner:, repo:, params:)
+        def call(client, issue:, owner:, repo:, params:)
           @issue = issue
           @owner = owner
           @repo = repo
