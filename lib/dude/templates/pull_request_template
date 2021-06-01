@@ -1,0 +1,7 @@
+title: >
+  [{issue_id}] {issue_title}
+body: |
+  ## Story
+  [**\[{issue_id}\] {issue_title}**]({issue_url})
+  ## Description
+  Example description of the issue

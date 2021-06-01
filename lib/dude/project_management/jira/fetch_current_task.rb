@@ -5,32 +5,21 @@ require_relative '../entities/issue'
 module Dude
   module ProjectManagement
     module Jira
-      class FetchCurrentTasks
+      class FetchCurrentTask
         include Settings
 
-        def initialize(client)
+        def initialize(client, id:)
           @client = client
+          @id = id
         end
 
         def call
-          board = client.Board.find(settings['ATLASSIAN_BOARD_ID'])
-
-          all_issues = board_type(board)
-
-          all_issues.map { |issue| create_issue(issue) }
+          create_issue(client.Issue.find(id))
         end
 
         private
 
-        attr_reader :client
-
-        def board_type(board)
-          case board.type
-          when 'kanban' then board.issues
-          when 'simple', 'scrum' then board.sprints(state: 'active').flat_map(&:issues)
-          else raise Dude::ToBeImplementedError
-          end
-        end
+        attr_reader :client, :id
 
         def create_issue(issue)
           Entities::Issue.new(
