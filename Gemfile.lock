@@ -6,6 +6,7 @@ PATH
       dry-cli (~> 0.6)
       faraday (~> 1.1)
       jira-ruby (~> 2.1)
+      tty-prompt (~> 0.23.1)
 
 GEM
   remote: https://rubygems.org/
@@ -53,6 +54,8 @@ GEM
     parallel (1.20.1)
     parser (3.0.1.1)
       ast (~> 2.4.1)
+    pastel (0.8.0)
+      tty-color (~> 0.5)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -94,9 +97,20 @@ GEM
       simplecov (~> 0.8)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.2)
+    tty-color (0.6.0)
+    tty-cursor (0.7.1)
+    tty-prompt (0.23.1)
+      pastel (~> 0.8)
+      tty-reader (~> 0.8)
+    tty-reader (0.9.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      wisper (~> 2.0)
+    tty-screen (0.8.1)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
+    wisper (2.0.1)
     zeitwerk (2.4.2)
 
 PLATFORMS

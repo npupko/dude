@@ -23,7 +23,7 @@ module Dude
       def task_title
         client = ProjectManagement::Client.new
         issue_title = client.get_task_name_by_id(id)
-        settings['TOGGL_TASK_FORMAT'].sub(/id/, id).sub(/title/, issue_title)
+        settings['TOGGL_TASK_FORMAT'].sub(/{issue_id}/, id).sub(/{issue_title}/, issue_title)
       end
     end
   end

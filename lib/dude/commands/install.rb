@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
+require 'tty-prompt'
+require 'fileutils'
+
 require_relative '../settings'
+require_relative '../setup/jira'
+require_relative '../setup/trello'
+require_relative '../setup/toggl'
+require_relative '../setup/github'
 
 module Dude
   module Commands
@@ -8,16 +15,70 @@ module Dude
       desc 'Creates .duderc for future configuration'
 
       def call
-        path = File.join(Dir.home, Settings::CONFIG_FILE)
-        if File.exist?(path)
-          puts 'Config file already exists'
-        else
-          File.open(path, 'w') { |f| f.write(duderc_file_content) }
-          puts '.duderc created in your HOME directory'
-        end
+        @prompt = TTY::Prompt.new
+
+        create_file_if_not_exists
+
+        @current_settings = Dude::Config.configure_with('.duderc.yml')
+        @current_settings[:project_management_tool] = setup_project_management_tool # jira, trello
+        @current_settings = send("setup_#{current_settings[:project_management_tool]}")
+        setup_features.each { send("setup_#{_1}") } # toggl, github
+
+        save
       end
 
       private
+
+      attr_reader :prompt, :current_settings
+
+      def setup_project_management_tool
+        prompt.select(Dude::Config.style_prompt("Select project management tool you're going to use:")) do |menu|
+          menu.choice name: 'Jira', value: 'jira'
+          menu.choice name: 'Trello', value: 'trello'
+          menu.choice name: 'Pivotal Tracker', value: 'pivotal', disabled: '(coming in future)'
+          menu.choice name: 'Github', value: 'github', disabled: '(coming in future)'
+        end
+      end
+
+      def setup_jira
+        Setup::Jira.new(prompt).call(settings: current_settings)
+      end
+
+      def setup_trello
+        Setup::Trello.new(prompt).call(settings: current_settings)
+      end
+
+      def setup_features
+        prompt.multi_select(Dude::Config.style_prompt('Select features you want to use:')) do |menu|
+          menu.choice 'Toggl time tracking features (Create/stop time entries)', :toggl
+          menu.choice 'Github PR creation', :github
+        end
+      end
+
+      def setup_toggl
+        Setup::Toggl.new(prompt).call(settings: current_settings)
+      end
+
+      def setup_github
+        Setup::Github.new(prompt).call(settings: current_settings)
+      end
+
+      def save
+        File.open('.duderc.yml', 'w') { |file| file.write(current_settings.to_yaml) }
+        puts 'Configuration file has been sucessfully updated'.green
+      rescue StandardError => e
+        puts "Something went wrong: #{e}"
+      end
+
+      def create_file_if_not_exists
+        path = File.join(Dir.pwd, Config::FILE_NAME)
+        if File.exist?(path)
+          puts 'Config file already exists'
+        else
+          FileUtils.cp(File.join(File.dirname(__FILE__), '../templates/duderc_template'), path)
+          puts '.duderc created in your HOME directory'
+        end
+      end
 
       def duderc_file_content
         <<~HEREDOC
@@ -63,7 +124,6 @@ module Dude
           # Example: https://dealmakerns.atlassian.net/secure/RapidBoard.jspa?rapidView=23&projectKey=DT - 23 is the id
           ATLASSIAN_BOARD_ID=
           # [JIRA setup end]
-
         HEREDOC
       end
     end

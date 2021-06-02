@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'dry-cli', '~> 0.6'
   spec.add_runtime_dependency 'faraday', '~> 1.1'
   spec.add_runtime_dependency 'jira-ruby', '~> 2.1'
+  spec.add_runtime_dependency 'tty-prompt', '~> 0.23.1'
 
   spec.add_development_dependency 'pry', '~> 0.14.0'
   spec.add_development_dependency 'rake', '~> 13.0'
