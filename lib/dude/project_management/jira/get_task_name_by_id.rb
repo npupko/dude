@@ -4,8 +4,6 @@ module Dude
   module ProjectManagement
     module Jira
       class GetTaskNameById
-        include Settings
-
         def initialize(client, id:)
           @client = client
           @id = id

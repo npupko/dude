@@ -6,12 +6,10 @@ require_relative './trello/client'
 module Dude
   module ProjectManagement
     class Client
-      include Settings
-
       attr_reader :client
 
       def initialize
-        tool = settings['PROJECT_MANAGEMENT_TOOL']
+        tool = Dude::SETTINGS[:project_management_tool]
         return unless LIST_OF_AVAILABLE_PROJECT_MANAGEMENT_TOOLS.include? tool
 
         @client = setup_client(tool)

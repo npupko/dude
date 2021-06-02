@@ -4,15 +4,13 @@ module Dude
   module ProjectManagement
     module Trello
       class GetTaskNameById
-        include Settings
-
         def initialize(client, id:)
           @client = client
           @id = id
         end
 
         def call
-          response = client.get("/1/boards/#{settings['ATLASSIAN_BOARD_ID']}/cards/#{id}")
+          response = client.get("/1/boards/#{Dude::SETTINGS.dig(:jira, :board_id)}/cards/#{id}")
           JSON.parse(response.body)['name']
         end
 

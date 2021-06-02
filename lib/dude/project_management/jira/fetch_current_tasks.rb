@@ -6,14 +6,12 @@ module Dude
   module ProjectManagement
     module Jira
       class FetchCurrentTasks
-        include Settings
-
         def initialize(client)
           @client = client
         end
 
         def call
-          board = client.Board.find(settings['ATLASSIAN_BOARD_ID'])
+          board = client.Board.find(Dude::SETTINGS.dig(:jira, :board_id))
 
           all_issues = board_type(board)
 
@@ -39,7 +37,7 @@ module Dude
             description: issue.description,
             status: issue.status.name,
             assignee: issue&.assignee&.displayName,
-            url: "#{settings['ATLASSIAN_URL']}/browse/#{issue.key}"
+            url: "#{Dude::SETTINGS.dig(:jira, :project, :url)}/browse/#{issue.key}"
           )
         end
       end

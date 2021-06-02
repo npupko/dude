@@ -10,21 +10,25 @@ module Dude
   module ProjectManagement
     module Jira
       class Client
-        include Settings
-
         attr_reader :client, :project
 
-        def initialize
-          options = {
-            username: settings['ATLASSIAN_EMAIL'],
-            password: settings['ATLASSIAN_TOKEN'],
-            site: settings['ATLASSIAN_URL'],
-            context_path: '',
-            auth_type: :basic
-          }
+        class << self
+          def options
+            {
+              username: Dude::SETTINGS.dig(:jira, :email),
+              password: Dude::SETTINGS.dig(:jira, :token),
+              site: Dude::SETTINGS.dig(:jira, :project, :url),
+              context_path: '',
+              auth_type: :basic
+            }
+          end
+        end
 
+        def initialize
           @client = JIRA::Client.new(options)
-          @project = client.Project.find(settings['ATLASSIAN_PROJECT_KEY'])
+          @project = client.Project.find(Dude::SETTINGS.dig(:jira, :project, :key))
+        rescue StandardError
+          nil
         end
 
         def respond_to_missing?(method_name, include_private = false)
@@ -49,6 +53,12 @@ module Dude
 
         def get_task_name_by_id(id)
           GetTaskNameById.new(client, id: id).call
+        end
+
+        def health_check
+          @project && true
+        rescue StandardError
+          false
         end
       end
     end

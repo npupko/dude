@@ -8,7 +8,9 @@
 
 A daily assistant in the hard work of a programmer
 
-This program helps to combine such services as [Jira](https://atlassian.net), [Toggl](https://toggl.com) and replace most routine activities with one simple CLI utility.
+This program helps to combine such services as [Jira](https://atlassian.net), [Trello](https://trello.com), [Toggl](https://toggl.com), etc. and replace most routine activities with one simple CLI utility.
+
+![Dude](/demo/dude.gif)
 
 ## Installation
 
@@ -26,54 +28,49 @@ Or install it yourself as:
 
     $ gem install dude-cli
 
-After that create .duderc file in your HOME directory by command:
+After that create .duderc.yml file in your work project directory by command:
 
     $ dude install
 
-And configure all variables in this file 
+It will offer you a step by step instruction how to setup dude:
 
-`PROJECT_MANAGEMENT_TOOL=jira|trello` - Project management (Now only Jira and Trello supported)
+![Setup Wizard](/demo/wizard.gif)
 
-##### Jira setup
+You always could edit this file manually and setup some stuff like Toggl time entry name or Github PR template
 
-`ATLASSIAN_EMAIL` - Your Jira email
+Default template could be found here: [lib/dude/templates/duderc_template](/lib/dude/templates/duderc_template)
 
-`ATLASSIAN_TOKEN` - How to create Atlassian token: https://support.siteimprove.com/hc/en-gb/articles/360004317332-How-to-create-an-API-token-from-your-Atlassian-account
-
-`ATLASSIAN_URL` - URL of your project. Example: https://example.atlassian.net
-
-`ATLASSIAN_PROJECT_KEY` - KEY of your project. If your issues have id BT-123 - BT is the key
-
-`ATLASSIAN_BOARD_ID`:
-Just open your atlassian main board and copy id from the url after rapidView=*ID* part.
-
-Example: https://dealmakerns.atlassian.net/secure/RapidBoard.jspa?rapidView=23&projectKey=DT - 23 is the id
-
-##### Trello setup
-You could generate your key and token here: https://trello.com/app-key
-
-`TRELLO_KEY`
-
-`TRELLO_TOKEN`
+### Additional configuration variables:
 
 #### Replace it with your project list names. Skip for empty lists
 
+```yaml
+:todo_list_name: To Do
+:in_progress_list_name: In Progress
+:code_review_list_name: Code Review
+:testing_list_name: TESTABLE
+:done_list_name: Done
 ```
-TODO_LIST_NAME=To Do
-IN_PROGRESS_LIST_NAME=In Progress
-CODE_REVIEW_LIST_NAME=Code Review
-TESTING_LIST_NAME=TESTABLE
-DONE_LIST_NAME=Done
+
+#### Use the *{issue_id}* and *{issue_title}* and specify format for the task titles in Toggl or keep it as it is
+
+```yaml
+:toggl:
+  :task_format: [{issue_id}] {issue_title}
 ```
 
-`TOGGL_PROJECT_NAME` - Your Toggl project name
+#### Github PR template looks like this (Available variables: *{issue_id}*, *{issue_title}*, *{issue_url}*)
 
-`TOGGL_TOKEN` - Your Toggl API token can be found at the bottom of the page: https://track.toggl.com/profile
-
-`TOGGL_WORKSPACE_ID` - Can be copied from url here: https://toggl.com/app/projects/. Example: 123456
-
-#### Use the *id* and *title* and specify format for the task titles in Toggl or keep it as it is
-`TOGGL_TASK_FORMAT=[id] title`
+```yaml
+:github:
+  :pr_template:
+    :title: "[{issue_id}] {issue_title}\n"
+    :body: |
+      ## Story
+      [**\[{issue_id}\] {issue_title}**]({issue_url})
+      ## Description
+      Example description of the issue
+```
 
 ## Usage
 
@@ -88,14 +85,16 @@ alias dude="rvm 2.7.2 do dude"
 
 |    Command    | Required parameters | Optional parameters |                                       Description                                      |
 |:-------------:|:-------------------|:-------------------|:--------------------------------------------------------------------------------------|
-| dude install  | -                   | -                   | Create .duderc file in your home directory                                             |
-| dude checkout | ISSUE_ID            | -                   | Checkout to branch with name "ID-issue-title"                                          |
-| dude track    | ISSUE_ID            | -                   | Start time entry in Toggl with issue project, title and id                             |
-| dude tasks    | -                   | -                   | Show all issues in current project (For current sprint)                                |
-| dude stop     | -                   | -                   | Stop current time entry in Toggl                                                       |
-| dude start    | ISSUE_ID            | -                   | Do `checkout`, `track` and `move` actions                                              |
-| dude move     | ISSUE_ID            | --list=NAME         | Move issue to another column (Will provide options if called without --list parameter) |
-| dude version  | -                   | -                   | Display gem version                                                                    |
+| dude install      | -                   | -                   | Create .duderc file in your home directory                                             |
+| dude checkout     | ISSUE_ID            | -                   | Checkout to branch with name "ID-issue-title"                                          |
+| dude track        | ISSUE_ID            | -                   | Start time entry in Toggl with issue project, title and id                             |
+| dude tasks        | -                   | -                   | Show all issues in current project (For current sprint)                                |
+| dude stop         | -                   | -                   | Stop current time entry in Toggl                                                       |
+| dude start        | ISSUE_ID            | -                   | Do `checkout`, `track` and `move` actions                                              |
+| dude move         | ISSUE_ID            | --list=NAME         | Move issue to another column (Will provide options if called without --list parameter) |
+| dude pr create    |                     |                     | Creates PR in Github using template                                                    |
+| dude version      | -                   | -                   | Display gem version                                                                    |
+| dude healthcheck  | -                   | -                   | Check configuration of all dependencies                                                |
 
 You also can use `dude help` for short description of every command.
 
@@ -109,4 +108,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Changelog
 
-https://github.com/npupko/dude/blob/master/CHANGELOG.md
+[CHANGELOG.md](/CHANGELOG.md)

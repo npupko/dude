@@ -8,9 +8,7 @@ RSpec.describe Dude::ProjectManagement::Client do
   let(:trello) { instance_double('Dude::ProjectManagement::Trello::Client') }
 
   before do
-    allow_any_instance_of(Dude::Settings).to receive(:settings).and_return({
-      'PROJECT_MANAGEMENT_TOOL' => project_management_tool
-    })
+    stub_const('Dude::SETTINGS', { project_management_tool: project_management_tool })
 
     allow_any_instance_of(described_class).to receive(:setup_client)
       .and_return(send(project_management_tool))

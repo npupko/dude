@@ -6,8 +6,6 @@ module Dude
   module ProjectManagement
     module Trello
       class MoveTaskToList
-        include Settings
-
         def initialize(client, id:, list_name:)
           @client = client
           @id = id
@@ -15,7 +13,7 @@ module Dude
         end
 
         def call
-          response = client.get("/1/boards/#{settings['ATLASSIAN_BOARD_ID']}/cards/#{id}", { fields: 'id' })
+          response = client.get("/1/boards/#{Dude::SETTINGS.dig(:jira, :board_id)}/cards/#{id}", { fields: 'id' })
           card_id = JSON.parse(response.body)['id']
           client.put("/1/cards/#{card_id}", { idList: list_id })
         end

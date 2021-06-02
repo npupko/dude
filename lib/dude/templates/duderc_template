@@ -1,0 +1,32 @@
+---
+:project_management_tool: jira
+:jira:
+  :email:
+  :token:
+  :project:
+    :url:
+    :key:
+  :board_id:
+:trello:
+  :board_id:
+  :key:
+  :token:
+:todo_list_name: To Do
+:in_progress_list_name: In Progress
+:code_review_list_name: Code Review
+:testing_list_name: TESTABLE
+:done_list_name: Done
+:toggl:
+  :project_name:
+  :token:
+  :workspace_id:
+  :task_format: "[{issue_id}] {issue_title}"
+:github:
+  :token:
+  :pr_template:
+    :title: "[{issue_id}] {issue_title}\n"
+    :body: |
+      ## Story
+      [**\[{issue_id}\] {issue_title}**]({issue_url})
+      ## Description
+      Example description of the issue

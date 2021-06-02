@@ -6,8 +6,6 @@ module Dude
   module CodeManagement
     module Github
       class CreatePullRequest
-        include Settings
-
         def call(client, issue:, owner:, repo:, params:)
           @issue = issue
           @owner = owner
