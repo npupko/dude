@@ -50,7 +50,7 @@ module Dude
       end
 
       def setup_project_key
-        prompt.ask(Dude::Config.style_prompt('KEY of your project. If your issues have id BT-123 - BT is the key'), {
+        prompt.ask(Dude::Config.style_prompt('KEY of your project (If your issues have id BT-123 - BT is the key):'), {
           required: true
         })
       end

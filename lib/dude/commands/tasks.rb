@@ -5,8 +5,6 @@ require_relative '../project_management/client'
 module Dude
   module Commands
     class Tasks < Dry::CLI::Command
-      include Settings
-
       desc "Print tasks as list with ID's and assignees"
 
       def call

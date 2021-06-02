@@ -6,8 +6,6 @@ module Dude
   module ProjectManagement
     module Jira
       class FetchCurrentTask
-        include Settings
-
         def initialize(client, id:)
           @client = client
           @id = id
@@ -28,7 +26,7 @@ module Dude
             description: issue.description,
             status: issue.status.name,
             assignee: issue&.assignee&.displayName,
-            url: "#{settings['ATLASSIAN_URL']}/browse/#{issue.key}"
+            url: "#{Dude::SETTINGS.dig(:dig, :project, :url)}/browse/#{issue.key}"
           )
         end
       end

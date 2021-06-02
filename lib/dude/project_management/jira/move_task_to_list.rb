@@ -4,8 +4,6 @@ module Dude
   module ProjectManagement
     module Jira
       class MoveTaskToList
-        include Settings
-
         def initialize(client, id:, list_name:)
           @client = client
           @id = id

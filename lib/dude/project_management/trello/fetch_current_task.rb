@@ -4,15 +4,13 @@ module Dude
   module ProjectManagement
     module Trello
       class FetchCurrentTask
-        include Settings
-
         def initialize(client, id:)
           @client = client
           @id = id
         end
 
         def call
-          response = client.get("/1/boards/#{settings['ATLASSIAN_BOARD_ID']}/cards/#{id}")
+          response = client.get("/1/boards/#{Dude::SETTINGS.dig(:jira, :board_id)}/cards/#{id}")
           create_issue JSON.parse(response.body)
         end
 
@@ -25,7 +23,7 @@ module Dude
             id: issue['idShort'],
             title: issue['name'],
             description: issue['desc'],
-            status: settings['IN_PROGRESS_LIST_NAME'], # OMG, let's fix this later
+            status: Dude::SETTINGS[:in_progress_list_name], # OMG, let's fix this later
             assignee: members(issue),
             url: issue['shortUrl']
           )

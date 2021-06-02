@@ -40,12 +40,15 @@ module Dude
         end
       end
 
-      def setup_jira
-        Setup::Jira.new(prompt).call(settings: current_settings)
+      def method_missing(method, *args, &block)
+        return super unless method.start_with?('setup_')
+
+        const_name = method.to_s.split('setup_').last
+        Object.const_get("Dude::Setup::#{const_name.capitalize}").new(prompt).call(settings: current_settings)
       end
 
-      def setup_trello
-        Setup::Trello.new(prompt).call(settings: current_settings)
+      def respond_to_missing?(method_name, include_private = false)
+        client.respond_to_missing?(method_name, include_private)
       end
 
       def setup_features
@@ -55,17 +58,11 @@ module Dude
         end
       end
 
-      def setup_toggl
-        Setup::Toggl.new(prompt).call(settings: current_settings)
-      end
-
-      def setup_github
-        Setup::Github.new(prompt).call(settings: current_settings)
-      end
-
       def save
         File.open('.duderc.yml', 'w') { |file| file.write(current_settings.to_yaml) }
-        puts 'Configuration file has been sucessfully updated'.green
+        puts 'Configuration file has been sucessfully updated'.green.bold
+        puts 'Your settings are in the .duderc.yml file'.yellow
+        puts 'You could change it manually for editing Toggl task format and Github PR template'.yellow
       rescue StandardError => e
         puts "Something went wrong: #{e}"
       end
@@ -73,58 +70,11 @@ module Dude
       def create_file_if_not_exists
         path = File.join(Dir.pwd, Config::FILE_NAME)
         if File.exist?(path)
-          puts 'Config file already exists'
+          puts 'Config file already exists. All settings will be rewrited'
         else
           FileUtils.cp(File.join(File.dirname(__FILE__), '../templates/duderc_template'), path)
           puts '.duderc created in your HOME directory'
         end
-      end
-
-      def duderc_file_content
-        <<~HEREDOC
-          # Please, don't use quotes and spaces.
-          # Write all variables using following format: NAME=VALUE
-
-          # Replace it with your project list names. Skip for empty lists
-          TODO_LIST_NAME=To Do
-          IN_PROGRESS_LIST_NAME=In Progress
-          CODE_REVIEW_LIST_NAME=Code Review
-          TESTING_LIST_NAME=TESTABLE
-          DONE_LIST_NAME=Done
-
-          # Your Toggl project name
-          TOGGL_PROJECT_NAME=
-          # Your Toggl API token can be found at the bottom of the page: https://track.toggl.com/profile
-          TOGGL_TOKEN=
-          # Can be copied from url here: https://toggl.com/app/projects/. Example: 123456
-          TOGGL_WORKSPACE_ID=
-          # Use the *id* and *title* and specify format for the task titles in Trello or keep it as it is
-          TOGGL_TASK_FORMAT=[id] title
-
-          # Now jira/trello only (Github, Gitlab)
-          # Choose one and uncomment section for Jira or Trello
-
-          # [TRELLO setup start]
-          # # https://trello.com/app-key
-          # PROJECT_MANAGEMENT_TOOL=trello
-          # TRELLO_KEY=
-          # TRELLO_TOKEN=
-          # [TRELLO setup end]
-
-          # [JIRA setup start]
-          PROJECT_MANAGEMENT_TOOL=jira
-          ATLASSIAN_EMAIL=
-          # How to create Atlassian token: https://support.siteimprove.com/hc/en-gb/articles/360004317332-How-to-create-an-API-token-from-your-Atlassian-account
-          ATLASSIAN_TOKEN=
-          # URL of your project. Example: https://example.atlassian.net
-          ATLASSIAN_URL=
-          # KEY of your project. If your issues have id BT-123 - BT is the key
-          ATLASSIAN_PROJECT_KEY=
-          # Just open your atlassian main board and copy id from the url after rapidView=*ID* part.
-          # Example: https://dealmakerns.atlassian.net/secure/RapidBoard.jspa?rapidView=23&projectKey=DT - 23 is the id
-          ATLASSIAN_BOARD_ID=
-          # [JIRA setup end]
-        HEREDOC
       end
     end
   end

@@ -6,8 +6,6 @@ module Dude
   module ProjectManagement
     module Trello
       class FetchCurrentTasks
-        include Settings
-
         attr_reader :fetch_lists
 
         def initialize(client, fetch_lists: nil)

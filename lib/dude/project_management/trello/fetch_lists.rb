@@ -4,14 +4,12 @@ module Dude
   module ProjectManagement
     module Trello
       class FetchLists
-        include Settings
-
         def initialize(client)
           @client = client
         end
 
         def call
-          response = client.get("/1/board/#{settings['ATLASSIAN_BOARD_ID']}/lists", { fields: 'name' })
+          response = client.get("/1/board/#{Dude::SETTINGS.dig(:jira, :board_id)}/lists", { fields: 'name' })
           JSON.parse(response.body)
         end
 

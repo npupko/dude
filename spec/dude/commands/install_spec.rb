@@ -3,7 +3,7 @@
 RSpec.describe Dude::Commands::Install do
   subject { described_class.new }
 
-  context 'when no config in Home folder' do
+  xcontext 'when no config in Home folder' do
     let(:mocked_file) { double('Mocked file') }
 
     before do
@@ -25,7 +25,7 @@ RSpec.describe Dude::Commands::Install do
     end
   end
 
-  context 'with existing config in Home folder' do
+  xcontext 'with existing config in Home folder' do
     before do
       allow(File).to receive(:exist?).and_return(true)
     end

@@ -3,8 +3,6 @@
 module Dude
   module Commands
     class Start < Dry::CLI::Command
-      include Settings
-
       desc 'Start task (Do checkout, track and move actions)'
 
       argument :id, required: true, desc: 'The card short ID'
@@ -19,16 +17,16 @@ module Dude
 
       def selected_list(list)
         case list
-        when 'todo' then settings['TODO_LIST_NAME']
-        when 'in_progress' then settings['IN_PROGRESS_LIST_NAME']
-        when 'code_review' then settings['CODE_REVIEW_LIST_NAME']
-        when 'testing' then settings['TESTING_LIST_NAME']
-        when 'done' then settings['DONE_LIST_NAME']
+        when 'todo' then Dude::SETTINGS[:todo_list_name]
+        when 'in_progress' then Dude::SETTINGS[:in_progress_list_name]
+        when 'code_review' then Dude::SETTINGS[:code_review_list_name]
+        when 'testing' then Dude::SETTINGS[:testing_list_name]
+        when 'done' then Dude::SETTINGS[:done_list_name]
         end
       end
 
       def time_tracking_enabled?
-        !settings['TOGGL_TOKEN'].nil?
+        !Dude::SETTINGS.dig(:toggl, :token).nil?
       end
     end
   end

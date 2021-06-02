@@ -12,13 +12,11 @@ module Dude
   module ProjectManagement
     module Trello
       class Client
-        include Settings
-
         def client
           @client ||= Faraday.new('https://api.trello.com/', {
             params: {
-              key: settings['TRELLO_KEY'],
-              token: settings['TRELLO_TOKEN']
+              key: Dude::SETTINGS.dig(:trello, :key),
+              token: Dude::SETTINGS.dig(:trello, :token)
             }
           })
         end
@@ -28,7 +26,7 @@ module Dude
         end
 
         def respond_to_missing?(method_name, include_private = false)
-          client.respond_to_missing?(method_name, include_private)
+          client.respond_to?(method_name, include_private)
         end
 
         def fetch_current_tasks
@@ -45,6 +43,12 @@ module Dude
 
         def get_task_name_by_id(id)
           GetTaskNameById.new(client, id: id).call
+        end
+
+        def health_check
+          client.get("/1/tokens/#{Dude::SETTINGS.dig(:trello, :token)}").status == 200
+        rescue StandardError
+          false
         end
       end
     end

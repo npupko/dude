@@ -8,10 +8,7 @@ RSpec.describe Dude::ProjectManagement::Trello::Client do
   let(:get_task_name_by_id) { instance_double('Dude::ProjectManagement::Trello::GetTaskNameById', call: true) }
 
   before do
-    allow(subject).to receive(:settings).and_return({
-      'TRELLO_KEY' => 'key',
-      'TRELLO_TOKEN' => 'token'
-    })
+    stub_const('Dude::SETTINGS', { trello: { key: 'key', token: 'token' } })
   end
 
   it '#client' do
