@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = 'https://github.com/npupko/dude'
   spec.metadata['changelog_uri'] = 'https://github.com/npupko/dude/blob/master/CHANGELOG.md'
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|demo)/}) }
 
   spec.bindir        = 'bin'
   spec.executables   = ['dude']
