@@ -13,6 +13,8 @@ module Dude
 
         def call
           create_issue(client.Issue.find(id))
+        rescue JIRA::HTTPError
+          puts "#{'Error:'.red.bold} Task #{id.bold} not found. Try again with correct task ID"
         end
 
         private

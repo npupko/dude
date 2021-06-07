@@ -7,7 +7,7 @@ module Dude
         desc 'Remove'
 
         def call(*)
-          puts '123'
+          puts 'To be created later'
         end
       end
     end

@@ -12,16 +12,14 @@ module Dude
       class Client
         attr_reader :client, :project
 
-        class << self
-          def options
-            {
-              username: Dude::SETTINGS.dig(:jira, :email),
-              password: Dude::SETTINGS.dig(:jira, :token),
-              site: Dude::SETTINGS.dig(:jira, :project, :url),
-              context_path: '',
-              auth_type: :basic
-            }
-          end
+        def options
+          {
+            username: Dude::SETTINGS.dig(:jira, :email),
+            password: Dude::SETTINGS.dig(:jira, :token),
+            site: Dude::SETTINGS.dig(:jira, :project, :url),
+            context_path: '',
+            auth_type: :basic
+          }
         end
 
         def initialize

@@ -4,7 +4,7 @@ Style/Documentation:
 AllCops:
   NewCops: enable
   SuggestExtensions: false
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
