@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0] - 2021-08 23
+
+### Added
+- Added `dude commit` feature
+- Fixed Github PR wrong URL's
+- Add install wizard
+
 ## [2.0.7] - 2021-04-02
 
 ### Added
