@@ -3,12 +3,14 @@
 module Dude
   module Commands
     class Commit < Dry::CLI::Command
+      include Helpers
+
       desc 'Create a commit with id and title of current story'
 
-      argument :id, required: true, desc: 'The card short ID'
+      argument :id, desc: 'The card short ID'
 
-      def call(id:)
-        Dude::Git::Commit.new.call(commit_name(id))
+      def call(id: nil)
+        Dude::Git::Commit.new.call(commit_name(id || current_story_id))
       end
 
       private

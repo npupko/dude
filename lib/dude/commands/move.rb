@@ -3,14 +3,16 @@
 module Dude
   module Commands
     class Move < Dry::CLI::Command
+      include Helpers
+
       desc 'Move task between board columns'
 
-      argument :id, required: true, desc: 'The card short ID'
+      argument :id, desc: 'The card short ID'
       option :list, desc: 'List name for moving card'
 
-      def call(id:, **options)
+      def call(id: nil, **options)
         client = ProjectManagement::Client.new
-        client.move_task_to_list(id, options[:list])
+        client.move_task_to_list(id || current_story_id, options[:list])
       end
     end
   end
