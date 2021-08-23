@@ -8,6 +8,7 @@ rescue LoadError
   nil
 end
 
+require_relative './dude/helpers'
 require_relative './dude/settings'
 require_relative './dude/version'
 require_relative './dude/commands'
