@@ -28,7 +28,7 @@ module Dude
             description: issue.description,
             status: issue.status.name,
             assignee: issue&.assignee&.displayName,
-            url: "#{Dude::SETTINGS.dig(:dig, :project, :url)}/browse/#{issue.key}"
+            url: "#{Dude::SETTINGS.dig(:jira, :project, :url)}/browse/#{issue.key}"
           )
         end
       end

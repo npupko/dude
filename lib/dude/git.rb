@@ -2,6 +2,7 @@
 
 require_relative './git/checkout'
 require_relative './git/current_branch_name'
+require_relative './git/commit'
 require_relative './git/remote_name'
 
 module Git

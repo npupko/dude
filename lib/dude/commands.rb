@@ -5,6 +5,7 @@ require_relative './commands/version'
 require_relative './commands/tasks'
 require_relative './commands/move'
 require_relative './commands/checkout'
+require_relative './commands/commit'
 require_relative './commands/start'
 require_relative './commands/track'
 require_relative './commands/stop'
@@ -21,6 +22,7 @@ module Dude
     register 'tasks', Dude::Commands::Tasks, aliases: ['t', '-t', '--tasks']
     register 'move', Dude::Commands::Move, aliases: ['m', '-m', '--move']
     register 'checkout', Dude::Commands::Checkout, aliases: ['co']
+    register 'commit', Dude::Commands::Commit
     register 'track', Dude::Commands::Track, aliases: ['tr']
     register 'stop', Dude::Commands::Stop
     register 'start', Dude::Commands::Start, aliases: ['st']

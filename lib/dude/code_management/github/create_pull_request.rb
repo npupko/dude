@@ -17,7 +17,7 @@ module Dude
           response = client.post("https://api.github.com/repos/#{owner}/#{repo}/pulls", body.to_json)
           res = JSON.parse(response.body)
 
-          return github_error unless res['errors'] && res['errors'].empty?
+          return github_error if res['errors'] && !res['errors'].empty?
 
           url = res['html_url']
           puts "Pull request has been created: #{url}"
