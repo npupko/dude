@@ -89,6 +89,7 @@ alias dude="rvm 2.7.2 do dude"
 | dude checkout     | ISSUE_ID            | -                   | Checkout to branch with name "ID-issue-title"                                          |
 | dude track        | ISSUE_ID            | -                   | Start time entry in Toggl with issue project, title and id                             |
 | dude tasks        | -                   | -                   | Show all issues in current project (For current sprint)                                |
+| dude commit       | ISSUE_ID            | -                   | Create commit with the ID and title of current story                                   |
 | dude stop         | -                   | -                   | Stop current time entry in Toggl                                                       |
 | dude start        | ISSUE_ID            | -                   | Do `checkout`, `track` and `move` actions                                              |
 | dude move         | ISSUE_ID            | --list=NAME         | Move issue to another column (Will provide options if called without --list parameter) |

@@ -20,5 +20,6 @@ module Dude
   LIST_OF_AVAILABLE_PROJECT_MANAGEMENT_TOOLS = %w[jira trello].freeze
 
   class ToBeImplementedError < StandardError; end
+
   class TaskNotFoundError < StandardError; end
 end
