@@ -83,19 +83,22 @@ To run gem in any folder using RVM just install gem to the global default ruby v
 alias dude="rvm 2.7.2 do dude"
 ```
 
-|    Command    | Required parameters | Optional parameters |                                       Description                                      |
-|:-------------:|:-------------------|:-------------------|:--------------------------------------------------------------------------------------|
+|    Command    | Required parameters | Optional parameters |                                       Description                                          |
+|:-------------:|:-------------------|:-------------------|:--------------------------------------------------------------------------------------       |
 | dude install      | -                   | -                   | Create .duderc file in your home directory                                             |
-| dude checkout     | ISSUE_ID            | -                   | Checkout to branch with name "ID-issue-title"                                          |
-| dude track        | ISSUE_ID            | -                   | Start time entry in Toggl with issue project, title and id                             |
+| dude checkout     | ISSUE_ID*            | -                   | Checkout to branch with name "ID-issue-title"                                          |
+| dude track        | ISSUE_ID*           | -                   | Start time entry in Toggl with issue project, title and id                             |
 | dude tasks        | -                   | -                   | Show all issues in current project (For current sprint)                                |
-| dude commit       | ISSUE_ID            | -                   | Create commit with the ID and title of current story                                   |
+| dude commit       | ISSUE_ID*           | -                   | Create commit with the ID and title of current story                                   |
 | dude stop         | -                   | -                   | Stop current time entry in Toggl                                                       |
-| dude start        | ISSUE_ID            | -                   | Do `checkout`, `track` and `move` actions                                              |
-| dude move         | ISSUE_ID            | --list=NAME         | Move issue to another column (Will provide options if called without --list parameter) |
+| dude start        | ISSUE_ID*            | -                   | Do `checkout`, `track` and `move` actions                                              |
+| dude move         | ISSUE_ID*            | --list=NAME         | Move issue to another column (Will provide options if called without --list parameter) |
 | dude pr create    |                     |                     | Creates PR in Github using template                                                    |
+| dude assign       | ISSUE_ID*            |                     | Assign current user as author for current task                                         |
 | dude version      | -                   | -                   | Display gem version                                                                    |
 | dude healthcheck  | -                   | -                   | Check configuration of all dependencies                                                |
+
+\* You could ignore ISSUE_ID if you are already on a git branch with issue id
 
 You also can use `dude help` for short description of every command.
 

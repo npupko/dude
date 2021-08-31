@@ -3,6 +3,7 @@
 RSpec.describe Dude::ProjectManagement::Trello::FetchCurrentTasks do
   subject { described_class.new(client, fetch_lists: fetch_lists) }
 
+  let(:fetch_lists) { instance_double('FetchLists', call: list_response) }
   let(:list_response) do
     [
       { 'id' => 'column_id', 'name' => 'Backlog' }
@@ -25,9 +26,9 @@ RSpec.describe Dude::ProjectManagement::Trello::FetchCurrentTasks do
     }
   end
 
-  skip '#call' do
+  it '#call' do
     expect(client).to receive(:get)
-      .with('/1/board/column_id/cards')
+      .with('/1/lists/column_id/cards')
       .and_return(OpenStruct.new(body: issue.to_json))
 
     expect(client).to receive(:get)

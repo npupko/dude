@@ -13,7 +13,7 @@ module Dude
         argument :id, desc: 'The card short ID'
         argument :base, desc: 'Different base branch. If no specified the master will be used'
 
-        def call(id: nil, base: nil)
+        def call(id: nil, base: nil, **)
           @id = id || current_story_id
           @base = base || BASE_BRANCH
 

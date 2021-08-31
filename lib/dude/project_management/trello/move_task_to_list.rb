@@ -13,7 +13,7 @@ module Dude
         end
 
         def call
-          response = client.get("/1/boards/#{Dude::SETTINGS.dig(:jira, :board_id)}/cards/#{id}", { fields: 'id' })
+          response = client.get("/1/boards/#{Dude::SETTINGS.dig(:trello, :board_id)}/cards/#{id}", { fields: 'id' })
           card_id = JSON.parse(response.body)['id']
           client.put("/1/cards/#{card_id}", { idList: list_id })
         end

@@ -5,6 +5,7 @@ require_relative './fetch_current_tasks'
 require_relative './fetch_current_task'
 require_relative './move_task_to_list'
 require_relative './get_task_name_by_id'
+require_relative './assign_author_for_task'
 
 module Dude
   module ProjectManagement
@@ -51,6 +52,10 @@ module Dude
 
         def get_task_name_by_id(id)
           GetTaskNameById.new(client, id: id).call
+        end
+
+        def assign_author_for_task(id)
+          AssignAuthorForTask.new(client, id: id).call
         end
 
         def health_check

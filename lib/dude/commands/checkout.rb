@@ -9,7 +9,7 @@ module Dude
 
       argument :id, desc: 'The card short ID'
 
-      def call(id: nil)
+      def call(id: nil, **)
         story_id = id || current_story_id
         client = ProjectManagement::Client.new
         issue_title = client.get_task_name_by_id(story_id)

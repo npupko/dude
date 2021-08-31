@@ -11,7 +11,7 @@ module Dude
 
       argument :id, desc: 'The card short ID'
 
-      def call(id: nil)
+      def call(id: nil, **)
         @id = id || current_story_id
         Dude::Toggl::StartTimeEntry.new.call(task_title: task_title, project: Dude::SETTINGS.dig(:toggl, :project_name))
       end
