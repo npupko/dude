@@ -5,12 +5,14 @@ require_relative '../time_trackers/toggl/start_time_entry'
 module Dude
   module Commands
     class Track < Dry::CLI::Command
+      include Helpers
+
       desc 'Start time entry in Toggl with issue title and id'
 
-      argument :id, required: true, desc: 'The card short ID'
+      argument :id, desc: 'The card short ID'
 
-      def call(id:)
-        @id = id
+      def call(id: nil, **)
+        @id = id || current_story_id
         Dude::Toggl::StartTimeEntry.new.call(task_title: task_title, project: Dude::SETTINGS.dig(:toggl, :project_name))
       end
 

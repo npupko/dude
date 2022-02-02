@@ -3,14 +3,18 @@
 module Dude
   module Commands
     class Start < Dry::CLI::Command
-      desc 'Start task (Do checkout, track and move actions)'
+      include Helpers
 
-      argument :id, required: true, desc: 'The card short ID'
+      desc 'Start task (Do checkout, track, assign and move actions)'
 
-      def call(id:)
-        Commands::Move.new.call(id: id, list: selected_list('in_progress'))
-        Commands::Checkout.new.call(id: id)
-        Commands::Track.new.call(id: id) if time_tracking_enabled?
+      argument :id, desc: 'The card short ID'
+
+      def call(id: nil, **)
+        story_id = id || current_story_id
+        Commands::Checkout.new.call(id: story_id)
+        Commands::Assign.new.call(id: story_id)
+        Commands::Move.new.call(id: story_id, list: selected_list('in_progress'))
+        Commands::Track.new.call(id: story_id) if time_tracking_enabled?
       end
 
       private

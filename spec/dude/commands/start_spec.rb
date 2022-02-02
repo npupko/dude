@@ -6,12 +6,14 @@ RSpec.describe Dude::Commands::Start do
   let(:move) { instance_double('Dude::Commands::Move', call: true) }
   let(:checkout) { instance_double('Dude::Commands::Checkout', call: true) }
   let(:track) { instance_double('Dude::Commands::Track', call: true) }
+  let(:assign) { instance_double('Dude::Commands::Assign', call: true) }
 
   before do
     stub_const('Dude::SETTINGS', { in_progress_list_name: 'list_name', toggl: { token: 'token' } })
 
     allow(Dude::Commands::Move).to receive(:new).and_return(move)
     allow(Dude::Commands::Checkout).to receive(:new).and_return(checkout)
+    allow(Dude::Commands::Assign).to receive(:new).and_return(assign)
     allow(Dude::Commands::Track).to receive(:new).and_return(track)
   end
 
