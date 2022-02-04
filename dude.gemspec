@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'colorize', '~> 0.8.1'
   spec.add_runtime_dependency 'dry-cli', '~> 0.6'
-  spec.add_runtime_dependency 'faraday', '~> 1.1'
+  spec.add_runtime_dependency 'faraday', '>= 1.1', '< 3.0'
   spec.add_runtime_dependency 'jira-ruby', '~> 2.1'
   spec.add_runtime_dependency 'tty-prompt', '~> 0.23.1'
 
